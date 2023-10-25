@@ -1,0 +1,13 @@
+public with sharing class StudentApplication {
+
+    @AuraEnabled(cacheable=true)
+    public static List<String> getPickListValuesIntoList(){
+        List<String> pickListValuesList= new List<String>();
+         Schema.DescribeFieldResult fieldResult = Student_Application__c.Arts_Department__c.getDescribe();
+         List<Schema.PicklistEntry> ple = fieldResult.getPicklistValues();
+         for( Schema.PicklistEntry pickListVal : ple){
+             pickListValuesList.add(pickListVal.getLabel());
+         }     
+         return pickListValuesList;
+     }
+}
